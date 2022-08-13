@@ -1,0 +1,12 @@
+{
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+        "keymap_bepo.h": "c",
+        "keymap.h": "c",
+        "action_layer.h": "c"
+    }
+}

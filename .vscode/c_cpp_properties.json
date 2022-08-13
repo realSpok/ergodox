@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "~/qmk_firmware/keyboards/ergodox_ez/config.h",
+                "${workspaceFolder}/**",
+                "~/qmk_firmware",
+                "/Users/nicolas/qmk_firmware/quantum/keymap_extras",
+                "/Users/nicolas/qmk_firmware/quantum"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-arm64"
+        }
+    ],
+    "version": 4
+}
