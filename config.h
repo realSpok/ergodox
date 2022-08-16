@@ -1,5 +1,15 @@
 #include "keyboards/ergodox_ez/config.h"
 
+
+/* USB Device descriptor parameter */
+#define VENDOR_ID       0x3297
+#define DEVICE_VER      0x0001
+#undef MANUFACTURER
+#define MANUFACTURER    Spok
+#define PRODUCT_ID      0x4974
+#undef PRODUCT
+#define PRODUCT         ErgoDox
+
 // Sets good default for the speed of the mouse.
 #undef MOUSEKEY_INTERVAL
 #undef MOUSEKEY_DELAY
