@@ -5,7 +5,7 @@
 #define VENDOR_ID       0x3297
 #define DEVICE_VER      0x0001
 #undef MANUFACTURER
-#define MANUFACTURER    Spok
+#define MANUFACTURER    Ergodox by Spok
 #define PRODUCT_ID      0x4974
 #undef PRODUCT
 #define PRODUCT         ErgoDox

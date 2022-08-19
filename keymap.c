@@ -83,14 +83,15 @@ enum {
 // This file must be included after DYNAMIC_MACRO_RANGE is defined...
 #include "dynamic_macro.h"
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT_ergodox(
 // Left hand
 BP_DLR,	    BP_DQUO,	BP_LDAQ,	BP_RDAQ,	BP_LPRN,	BP_RPRN,	KC_DEL,
 KC_TAB,		BP_B,   	BP_EACU,	BP_P,		BP_O,		BP_EGRV,	KC_BSPC,
 KC_ESC,   BP_A,		BP_U,		BP_I,		BP_E,		BP_COMM,
-KC_LCTL,	BP_AGRV,	BP_Y,		BP_X,		BP_DOT,		BP_K,		LCTL(KC_BSPC),
-CTLX,	LCTL(BP_C),	LCTL(BP_V),	KC_LGUI,	KC_LALT,
+KC_LCTL,	BP_AGRV,	BP_Y,		BP_X,		BP_DOT,		BP_K,		LALT(KC_BSPC),
+CTLX,	LGUI(BP_C),	LGUI(BP_V),	KC_LGUI,	KC_LALT,
 														TG(FNSPACE),	TG(QWER),
 																TG(GAMING),
 												KC_ENTER, 	KC_LSHIFT,	LCTL(LALT(BP_B)),
@@ -98,11 +99,12 @@ CTLX,	LCTL(BP_C),	LCTL(BP_V),	KC_LGUI,	KC_LALT,
 				BP_PERC,	BP_AT,		BP_PLUS,	BP_MINS,	BP_SLSH,	BP_ASTR,	BP_EQL,
 				KC_CAPSLOCK,	BP_DCIR,	BP_V,		BP_D,		BP_L,		BP_J,		BP_Z,
 						BP_C,		BP_T,		BP_S,		BP_R,		BP_N,		BP_M,
-				BP_CCED,	BP_ECIR,	BP_Q,		BP_G,		BP_H,		BP_F,		BP_W,
+				BP_CCED,	BP_QUOT,	BP_Q,		BP_G,		BP_H,		BP_F,		BP_W,
 								KC_RALT,	KC_LEFT,	KC_DOWN,	KC_UP,		KC_RIGHT,
 KC_NUMLOCK,	KC_INS,
 KC_VOLU,
 KC_VOLD,	KC_RSHIFT,	LT(FNSPACE,KC_SPACE)),
+
 
 //FNSpace layer with some cool stuff.
 /*==================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -111,7 +113,7 @@ KC_VOLD,	KC_RSHIFT,	LT(FNSPACE,KC_SPACE)),
 // Left hand
 KC_TRNS,	S(KC_QUOT),	S(KC_COMM),	S(KC_DOT),	KC_LPRN,	KC_RPRN,	KC_DEL,
 ALTTAB,	KC_SPC,		COPL,	LSFT(KC_INS),	C(S(BP_X)),	KC_E,		KC_VOLU,
-KC_TRNS,	KC_HOME,	LCTL(KC_LEFT),	LCTL(KC_RIGHT),	KC_END,		KC_COMMA,
+KC_TRNS,	LGUI(KC_LEFT),	LALT(KC_LEFT),	LALT(KC_RIGHT),	LGUI(KC_RIGHT),		KC_COMMA,
 KC_TRNS, 	KC_TRNS,	LGUI(BP_Q),	LGUI(BP_W),	KC_DOT,		KC_K,		KC_VOLD,
 KC_TRNS,	KC_TRNS,	KC_TRNS,	KC_TRNS,	KC_LALT,
 														KC_TRNS,	KC_TRNS,
