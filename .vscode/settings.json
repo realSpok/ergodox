@@ -8,5 +8,6 @@
         "keymap_bepo.h": "c",
         "keymap.h": "c",
         "action_layer.h": "c"
-    }
+    },
+    "window.title": "${rootName}${separator}${activeEditorShort} ${separator} [Branch: main]"
 }
