@@ -206,26 +206,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void)
 {
-  ergodox_right_led_1_off();
-  ergodox_right_led_2_off();
-  ergodox_right_led_3_off();
+  ergodox_right_led_1_on();
+  ergodox_right_led_2_on();
+  ergodox_right_led_3_on();
 };
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void){
-
+//  ergodox_right_led_1_on();
 };
 
 // The state of the LEDs requested by the system, as a bitmask.
 static uint8_t sys_led_state = 0;
 
 // Use these masks to read the system LEDs state.
-static const uint8_t sys_led_mask_num_lock = 1 << USB_LED_NUM_LOCK;
-static const uint8_t sys_led_mask_caps_lock = 1 << USB_LED_CAPS_LOCK;
-static const uint8_t sys_led_mask_scroll_lock = 1 << USB_LED_SCROLL_LOCK;
+//static const uint8_t sys_led_mask_num_lock = 1 << USB_LED_NUM_LOCK;
+//static const uint8_t sys_led_mask_caps_lock = 1 << USB_LED_CAPS_LOCK;
+//static const uint8_t sys_led_mask_scroll_lock = 1 << USB_LED_SCROLL_LOCK;
 
 // Value to use to switch LEDs on. The default value of 255 is far too bright.
-static const uint8_t max_led_value = 20;
+static const uint8_t max_led_value = 160;
 
 // Whether the given layer (one of the constant defined at the top) is active.
 #define LAYER_ON(layer) (current_layer_state & (1 << layer))
@@ -269,7 +269,7 @@ void led_set_user(uint8_t usb_led)
   sys_led_state = usb_led;
   if (LAYER_ON(SYSLEDS))
   {
-    if (sys_led_state & sys_led_mask_caps_lock)
+/*     if (sys_led_state & sys_led_mask_caps_lock)
     {
       led_1_on();
     }
@@ -293,7 +293,7 @@ void led_set_user(uint8_t usb_led)
     {
       led_3_off();
     }
-  }
+ */  }
 }
 
 layer_state_t layer_state_set_user(layer_state_t state)
@@ -309,38 +309,38 @@ layer_state_t layer_state_set_user(layer_state_t state)
     return state;
   }
 
-  if (LAYER_ON(SYSLEDS))
-  {
-    led_set_user(sys_led_state);
-    return state;
-  }
+  //if (LAYER_ON(SYSLEDS))
+  //{
+  //  led_set_user(sys_led_state);
+  //  return state;
+  //}
 
-  if (LAYER_ON(FN))
-  {
-    led_1_on();
-  }
-  else
+  if (LAYER_ON(FNSPACE))
   {
     led_1_off();
   }
-
-  if (LAYER_ON(NUMS))
-  {
-    led_2_on();
-  }
   else
   {
-    led_2_off();
+    led_1_on();
   }
 
-  if (LAYER_ON(MOUSE))
-  {
-    led_3_on();
-  }
-  else
-  {
-    led_3_off();
-  }
+  //if (LAYER_ON(NUMS))
+  //{
+  //  led_2_on();
+  //}
+  //else
+  //{
+  //  led_2_off();
+  //}
+
+  //if (LAYER_ON(MOUSE))
+  //{
+  //  led_3_on();
+  //}
+  //else
+  //{
+  //  led_3_off();
+  //}
 
   return state;
 };
