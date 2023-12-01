@@ -97,8 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC, BP_A, BP_U, BP_I, BP_E, BP_COMM,
         KC_LCTL, BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, LALT(KC_BSPC),
         LGUI(BP_X), LGUI(BP_C), LGUI(BP_V), KC_LGUI, KC_LALT,
-        TG(FNSPACE), TG(QWER),
+        ALTTAB, TG(QWER),
         TG(GAMING),
+        ;
         KC_ENTER, KC_LSHIFT, LCTL(LALT(BP_B)),
         // Right hand
         BP_PERC, BP_AT, BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
@@ -106,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         BP_C, BP_T, BP_S, BP_R, BP_N, BP_M,
         BP_CCED, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, BP_W,
         KC_RALT, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT,
-        KC_NUMLOCK, KC_INS,
+        ALTTAB, KC_INS,
         KC_VOLU,
         KC_VOLD, KC_RSHIFT, LT(FNSPACE, KC_SPACE)),
 
@@ -187,25 +188,29 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Runs for each key down or up event.
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
-  if (keycode != TD(TAP_MACRO))
+  switch (keycode)
   {
-    // That key is processed by the macro_tapdance_fn. Not ignoring it here is
-    // mostly a no-op except that it is recorded in the macros (and uses space).
-    // We can't just return false when the key is a tap dance, because
-    // process_record_user, is called before the tap dance processing (and
-    // returning false would eat the tap dance).
-    if (!process_record_dynamic_macro(keycode, record))
+  case ALTTAB:
+    if (record->event.pressed)
     {
-      return false;
+      // when keycode QMKBEST is pressed
+      register_code(KC_LALT);
+      tap_code_delay(KC_TAB, 50);
+      unregister_code(KC_LALT);
     }
+    else
+    {
+      // when keycode QMKBEST is released
+    }
+    break;
   }
-
-  return true; // Let QMK send the enter press/release events
+  return true;
 }
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void)
 {
+  ergodox_board_led_off();
   ergodox_right_led_1_on();
   ergodox_right_led_2_on();
   ergodox_right_led_3_on();
@@ -213,19 +218,19 @@ void matrix_init_user(void)
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void){
-//  ergodox_right_led_1_on();
+
 };
 
 // The state of the LEDs requested by the system, as a bitmask.
 static uint8_t sys_led_state = 0;
 
 // Use these masks to read the system LEDs state.
-//static const uint8_t sys_led_mask_num_lock = 1 << USB_LED_NUM_LOCK;
-//static const uint8_t sys_led_mask_caps_lock = 1 << USB_LED_CAPS_LOCK;
-//static const uint8_t sys_led_mask_scroll_lock = 1 << USB_LED_SCROLL_LOCK;
+// static const uint8_t sys_led_mask_num_lock = 1 << USB_LED_NUM_LOCK;
+// static const uint8_t sys_led_mask_caps_lock = 1 << USB_LED_CAPS_LOCK;
+// static const uint8_t sys_led_mask_scroll_lock = 1 << USB_LED_SCROLL_LOCK;
 
 // Value to use to switch LEDs on. The default value of 255 is far too bright.
-static const uint8_t max_led_value = 160;
+static const uint8_t max_led_value = 120;
 
 // Whether the given layer (one of the constant defined at the top) is active.
 #define LAYER_ON(layer) (current_layer_state & (1 << layer))
@@ -269,78 +274,5 @@ void led_set_user(uint8_t usb_led)
   sys_led_state = usb_led;
   if (LAYER_ON(SYSLEDS))
   {
-/*     if (sys_led_state & sys_led_mask_caps_lock)
-    {
-      led_1_on();
-    }
-    else
-    {
-      led_1_off();
-    }
-    if (sys_led_state & sys_led_mask_num_lock)
-    {
-      led_2_on();
-    }
-    else
-    {
-      led_2_off();
-    }
-    if (sys_led_state & sys_led_mask_scroll_lock)
-    {
-      led_3_on();
-    }
-    else
-    {
-      led_3_off();
-    }
- */  }
+  }
 }
-
-layer_state_t layer_state_set_user(layer_state_t state)
-{
-  current_layer_state = state;
-  swap_hands = LAYER_ON(SWAP);
-
-  if (is_macro1_recording)
-  {
-    led_1_on();
-    led_2_on();
-    led_3_on();
-    return state;
-  }
-
-  //if (LAYER_ON(SYSLEDS))
-  //{
-  //  led_set_user(sys_led_state);
-  //  return state;
-  //}
-
-  if (LAYER_ON(FNSPACE))
-  {
-    led_1_off();
-  }
-  else
-  {
-    led_1_on();
-  }
-
-  //if (LAYER_ON(NUMS))
-  //{
-  //  led_2_on();
-  //}
-  //else
-  //{
-  //  led_2_off();
-  //}
-
-  //if (LAYER_ON(MOUSE))
-  //{
-  //  led_3_on();
-  //}
-  //else
-  //{
-  //  led_3_off();
-  //}
-
-  return state;
-};
